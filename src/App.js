@@ -3,6 +3,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Budget from './components/Budget';
+import Remaining from './components/Remaining';
 
 import { AppProvider } from './context/AppContext';
 
@@ -19,7 +20,9 @@ const App = () => {
                     }
 
                     {
-                        /* Add Remaining component here*/
+                        <div className='col-sm'>
+                            <Remaining />
+                        </div>
                     }
 
                     {
