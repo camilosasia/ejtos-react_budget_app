@@ -5,7 +5,7 @@ export default function AllocationForm() {
     const { remaining, dispatch } = useContext(AppContext);
 
     const [name, setName] = useState("");
-    const [cost, setCost] = useState(0);
+    const [cost, setCost] = useState("");
     const [action, setAction] = useState("Add");
 
     function submitEvent() {
@@ -14,17 +14,27 @@ export default function AllocationForm() {
             return;
         }
 
+        let costValue = parseInt(cost);
+        if (isNaN(costValue)) {
+            alert("Invalid value. Please enter numbers only.");
+            return;
+        }
+
+        if (costValue < 0) {
+            alert("The value should be non-negative")
+            return;
+        }
 
         const expense = {
             name,
-            cost: parseInt(cost)
+            cost: costValue
         };
 
         switch (action) {
             case "Add":
                 if (cost > remaining) {
                     alert("The value cannot exceed remaining funds £" + remaining);
-                    setCost(0);
+                    setCost("");
                     return;
                 }
 
@@ -60,14 +70,18 @@ export default function AllocationForm() {
                     <option defaultValue value="Add" name="Add">Add</option>
                     <option value="Reduce" name="Reduce">Reduce</option>
                 </select>
-                <input
-                    required='required'
-                    type='number'
-                    id='cost'
-                    value={cost}
-                    style={{ marginLeft: '2rem', size: 10 }}
-                    onChange={(event) => setCost(event.target.value)}>
-                </input>
+                <div style={{ marginLeft: '2rem' }}>
+                    £
+                    <input
+                        required='required'
+                        type='number'
+                        id='cost'
+                        value={cost}
+                        min={0}
+                        style={{ marginLeft: "0.5rem" }}
+                        onChange={(event) => setCost(event.target.value)}>
+                    </input>
+                </div>
                 <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
                     Save
                 </button>
