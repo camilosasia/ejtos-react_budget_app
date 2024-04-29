@@ -14,7 +14,7 @@ export default function Budget() {
     return (
         <div className="alert alert-secondary">
             <span style={{ marginRight: 20 }}>Budget: £</span>
-            <input type="number" step={10} value={budget} onChange={handlebBudgetChange} />
+            <input style={{ maxWidth: "100%" }} type="number" step={10} value={budget} onChange={handlebBudgetChange} />
         </div>
     )
 }
