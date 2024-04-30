@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
 export default function AllocationForm() {
-    const { remaining, dispatch } = useContext(AppContext);
+    const { remaining, currency, dispatch } = useContext(AppContext);
 
     const [name, setName] = useState("");
     const [cost, setCost] = useState("");
@@ -71,7 +71,7 @@ export default function AllocationForm() {
                     <option value="Reduce" name="Reduce">Reduce</option>
                 </select>
                 <div style={{ marginLeft: '2rem' }}>
-                    £
+                    {currency}
                     <input
                         required='required'
                         type='number'
