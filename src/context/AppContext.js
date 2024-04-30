@@ -26,6 +26,23 @@ export const AppReducer = (state, action) => {
                 expenses
             };
         }
+        case 'SUBSTRACT_EXPENSE': {
+            const expenses = state.expenses.map(expense => {
+                if (expense.name === action.payload.name && expense.cost - action.payload.cost >= 0) {
+                    return {
+                        ...expense,
+                        cost: expense.cost - action.payload.cost
+                    }
+                }
+                return expense;
+            });
+
+
+            return {
+                ...state,
+                expenses
+            }
+        }
         case 'RED_EXPENSE':
             {
                 const expenses = state.expenses.map((expense) => {
